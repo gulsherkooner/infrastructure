@@ -61,6 +61,257 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: DatingPost; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."DatingPost" (
+    id integer NOT NULL,
+    user_id character varying(255) NOT NULL,
+    image character varying(255) NOT NULL,
+    type character varying(255) DEFAULT 'image/jpeg'::character varying,
+    name character varying(255),
+    ispinned boolean DEFAULT false,
+    "createdAt" timestamp with time zone NOT NULL,
+    "updatedAt" timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public."DatingPost" OWNER TO postgres;
+
+--
+-- Name: DatingPost_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."DatingPost_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."DatingPost_id_seq" OWNER TO postgres;
+
+--
+-- Name: DatingPost_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."DatingPost_id_seq" OWNED BY public."DatingPost".id;
+
+
+--
+-- Name: DatingProfile; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."DatingProfile" (
+    id integer NOT NULL,
+    user_id character varying(255) NOT NULL,
+    "firstName" character varying(255),
+    gender character varying(255)[] DEFAULT (ARRAY[]::character varying[])::character varying(255)[],
+    "interestedIn" character varying(255)[] DEFAULT (ARRAY[]::character varying[])::character varying(255)[],
+    "lookingFor" character varying(255)[] DEFAULT (ARRAY[]::character varying[])::character varying(255)[],
+    age integer,
+    height character varying(255),
+    "drinkFreq" character varying(255)[] DEFAULT (ARRAY[]::character varying[])::character varying(255)[],
+    "smokeFreq" character varying(255)[] DEFAULT (ARRAY[]::character varying[])::character varying(255)[],
+    "workoutOptions" character varying(255)[] DEFAULT (ARRAY[]::character varying[])::character varying(255)[],
+    locations character varying(255)[] DEFAULT (ARRAY[]::character varying[])::character varying(255)[],
+    professions character varying(255)[] DEFAULT (ARRAY[]::character varying[])::character varying(255)[],
+    languages character varying(255)[] DEFAULT (ARRAY[]::character varying[])::character varying(255)[],
+    "describeSelf" character varying(255),
+    "idealDate" character varying(255),
+    "greatPartner" character varying(255),
+    likes character varying(255)[] DEFAULT (ARRAY[]::character varying[])::character varying(255)[],
+    profile_img_url character varying(255)[] DEFAULT (ARRAY[]::character varying[])::character varying(255)[],
+    banner_img_url character varying(255)[] DEFAULT (ARRAY[]::character varying[])::character varying(255)[],
+    phone character varying(255),
+    website character varying(255),
+    "createdAt" timestamp with time zone NOT NULL,
+    "updatedAt" timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public."DatingProfile" OWNER TO postgres;
+
+--
+-- Name: DatingProfile_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."DatingProfile_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."DatingProfile_id_seq" OWNER TO postgres;
+
+--
+-- Name: DatingProfile_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."DatingProfile_id_seq" OWNED BY public."DatingProfile".id;
+
+
+--
+-- Name: Settings; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Settings" (
+    id integer NOT NULL,
+    user_id character varying(255) NOT NULL,
+    accessibility jsonb DEFAULT '{"autoplay": "", "fontSize": "", "appearance": "", "colorContrast": ""}'::jsonb,
+    content jsonb DEFAULT '{"likes": [], "dislikes": [], "localContent": "", "suggestionPreference": "", "sensitiveContentLevel": ""}'::jsonb,
+    notifications jsonb DEFAULT '{"push": {"news": "", "likes": "", "offers": "", "comments": "", "messages": "", "trending": "", "datingMessages": ""}, "email": {"tips": "", "updates": "", "reminders": "", "connections": "", "suggestions": ""}}'::jsonb,
+    privacy jsonb DEFAULT '{"location": {"allowAccess": "", "suggestions": "", "showInProfile": ""}, "messages": {"onlineStatus": "", "readReceipts": "", "whoCanMessage": ""}, "mutedUsers": [], "blockedUsers": []}'::jsonb,
+    "createdAt" timestamp with time zone NOT NULL,
+    "updatedAt" timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public."Settings" OWNER TO postgres;
+
+--
+-- Name: Settings_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Settings_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."Settings_id_seq" OWNER TO postgres;
+
+--
+-- Name: Settings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Settings_id_seq" OWNED BY public."Settings".id;
+
+
+--
+-- Name: UserPaymentMethod; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."UserPaymentMethod" (
+    id integer NOT NULL,
+    "userId" character varying(255) NOT NULL,
+    name character varying(255),
+    icon character varying(255),
+    type character varying(255),
+    "createdAt" timestamp with time zone NOT NULL,
+    "updatedAt" timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public."UserPaymentMethod" OWNER TO postgres;
+
+--
+-- Name: UserPaymentMethod_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."UserPaymentMethod_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."UserPaymentMethod_id_seq" OWNER TO postgres;
+
+--
+-- Name: UserPaymentMethod_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."UserPaymentMethod_id_seq" OWNED BY public."UserPaymentMethod".id;
+
+
+--
+-- Name: UserWallet; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."UserWallet" (
+    id integer NOT NULL,
+    "userId" character varying(255) NOT NULL,
+    balance double precision DEFAULT '0'::double precision,
+    "createdAt" timestamp with time zone NOT NULL,
+    "updatedAt" timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public."UserWallet" OWNER TO postgres;
+
+--
+-- Name: UserWallet_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."UserWallet_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."UserWallet_id_seq" OWNER TO postgres;
+
+--
+-- Name: UserWallet_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."UserWallet_id_seq" OWNED BY public."UserWallet".id;
+
+
+--
+-- Name: WalletTransaction; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."WalletTransaction" (
+    id integer NOT NULL,
+    "userWalletId" integer NOT NULL,
+    title character varying(255) NOT NULL,
+    amount double precision NOT NULL,
+    date timestamp with time zone,
+    "createdAt" timestamp with time zone NOT NULL,
+    "updatedAt" timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public."WalletTransaction" OWNER TO postgres;
+
+--
+-- Name: WalletTransaction_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."WalletTransaction_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."WalletTransaction_id_seq" OWNER TO postgres;
+
+--
+-- Name: WalletTransaction_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."WalletTransaction_id_seq" OWNED BY public."WalletTransaction".id;
+
+
+--
 -- Name: followers; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -143,6 +394,96 @@ CREATE TABLE public.users (
 ALTER TABLE public.users OWNER TO postgres;
 
 --
+-- Name: DatingPost id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."DatingPost" ALTER COLUMN id SET DEFAULT nextval('public."DatingPost_id_seq"'::regclass);
+
+
+--
+-- Name: DatingProfile id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."DatingProfile" ALTER COLUMN id SET DEFAULT nextval('public."DatingProfile_id_seq"'::regclass);
+
+
+--
+-- Name: Settings id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Settings" ALTER COLUMN id SET DEFAULT nextval('public."Settings_id_seq"'::regclass);
+
+
+--
+-- Name: UserPaymentMethod id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."UserPaymentMethod" ALTER COLUMN id SET DEFAULT nextval('public."UserPaymentMethod_id_seq"'::regclass);
+
+
+--
+-- Name: UserWallet id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."UserWallet" ALTER COLUMN id SET DEFAULT nextval('public."UserWallet_id_seq"'::regclass);
+
+
+--
+-- Name: WalletTransaction id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."WalletTransaction" ALTER COLUMN id SET DEFAULT nextval('public."WalletTransaction_id_seq"'::regclass);
+
+
+--
+-- Data for Name: DatingPost; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."DatingPost" (id, user_id, image, type, name, ispinned, "createdAt", "updatedAt") FROM stdin;
+\.
+
+
+--
+-- Data for Name: DatingProfile; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."DatingProfile" (id, user_id, "firstName", gender, "interestedIn", "lookingFor", age, height, "drinkFreq", "smokeFreq", "workoutOptions", locations, professions, languages, "describeSelf", "idealDate", "greatPartner", likes, profile_img_url, banner_img_url, phone, website, "createdAt", "updatedAt") FROM stdin;
+\.
+
+
+--
+-- Data for Name: Settings; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Settings" (id, user_id, accessibility, content, notifications, privacy, "createdAt", "updatedAt") FROM stdin;
+\.
+
+
+--
+-- Data for Name: UserPaymentMethod; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."UserPaymentMethod" (id, "userId", name, icon, type, "createdAt", "updatedAt") FROM stdin;
+\.
+
+
+--
+-- Data for Name: UserWallet; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."UserWallet" (id, "userId", balance, "createdAt", "updatedAt") FROM stdin;
+\.
+
+
+--
+-- Data for Name: WalletTransaction; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."WalletTransaction" (id, "userWalletId", title, amount, date, "createdAt", "updatedAt") FROM stdin;
+\.
+
+
+--
 -- Data for Name: followers; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -189,6 +530,120 @@ c9a9302f-f54d-476c-826f-d975ecbb16f1	kiranraj80555@gmail.com	Kiranraj20	$2b$10$y
 ba1d8d72-40b9-42df-aef9-0c0869037c90	cyros.sachin@gmail.com	sachin_dev	$2b$10$4sKA4Z3hNb5g6fho7QT/seengoyBqXHkPbTcdqsMHDBizBg.3KEu.	Sachin	\N	20-11-1984	\N	2025-05-21 15:02:18.909+05:30	2025-05-21 15:02:18.909+05:30	0	0	\N	f
 1013bfd1-9ad7-417f-87a9-71145e92c76c	jodha6671@gmail.com	cyros_sachin	$2b$10$9IBmdB3FORzQ39Ei82Fwhe1mEn8s.ITyXxlY9w0OR9LbL4Y22xmLe	Kumar Sachin	\N	20-11-2005	\N	2025-05-25 20:06:28.202+05:30	2025-05-25 20:06:28.202+05:30	0	0	\N	f
 \.
+
+
+--
+-- Name: DatingPost_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."DatingPost_id_seq"', 1, false);
+
+
+--
+-- Name: DatingProfile_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."DatingProfile_id_seq"', 1, false);
+
+
+--
+-- Name: Settings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Settings_id_seq"', 1, false);
+
+
+--
+-- Name: UserPaymentMethod_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."UserPaymentMethod_id_seq"', 1, false);
+
+
+--
+-- Name: UserWallet_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."UserWallet_id_seq"', 1, false);
+
+
+--
+-- Name: WalletTransaction_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."WalletTransaction_id_seq"', 1, false);
+
+
+--
+-- Name: DatingPost DatingPost_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."DatingPost"
+    ADD CONSTRAINT "DatingPost_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: DatingProfile DatingProfile_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."DatingProfile"
+    ADD CONSTRAINT "DatingProfile_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: DatingProfile DatingProfile_user_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."DatingProfile"
+    ADD CONSTRAINT "DatingProfile_user_id_key" UNIQUE (user_id);
+
+
+--
+-- Name: Settings Settings_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Settings"
+    ADD CONSTRAINT "Settings_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Settings Settings_user_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Settings"
+    ADD CONSTRAINT "Settings_user_id_key" UNIQUE (user_id);
+
+
+--
+-- Name: UserPaymentMethod UserPaymentMethod_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."UserPaymentMethod"
+    ADD CONSTRAINT "UserPaymentMethod_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: UserWallet UserWallet_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."UserWallet"
+    ADD CONSTRAINT "UserWallet_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: UserWallet UserWallet_userId_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."UserWallet"
+    ADD CONSTRAINT "UserWallet_userId_key" UNIQUE ("userId");
+
+
+--
+-- Name: WalletTransaction WalletTransaction_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."WalletTransaction"
+    ADD CONSTRAINT "WalletTransaction_pkey" PRIMARY KEY (id);
 
 
 --
@@ -251,6 +706,14 @@ CREATE INDEX followers_target_userid ON public.followers USING btree (target_use
 --
 
 CREATE INDEX followers_user_id ON public.followers USING btree (user_id);
+
+
+--
+-- Name: WalletTransaction WalletTransaction_userWalletId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."WalletTransaction"
+    ADD CONSTRAINT "WalletTransaction_userWalletId_fkey" FOREIGN KEY ("userWalletId") REFERENCES public."UserWallet"(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
