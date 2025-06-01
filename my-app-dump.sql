@@ -18,7 +18,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: enum_post_media_media_type; Type: TYPE; Schema: public; Owner: postgres
+-- Name: enum_post_media_media_type; Type: TYPE; Schema: public; Owner: postgres 
 --
 
 CREATE TYPE public.enum_post_media_media_type AS ENUM (
