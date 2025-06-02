@@ -355,10 +355,10 @@ CREATE TABLE public.users (
 ALTER TABLE public.users OWNER TO postgres;
 
 --
--- Name: waller-transaction; Type: TABLE; Schema: public; Owner: postgres
+-- Name: wallet-transaction; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public."waller-transaction" (
+CREATE TABLE public."wallet-transaction" (
     id integer NOT NULL,
     "userWalletId" integer NOT NULL,
     title character varying(255) NOT NULL,
@@ -369,7 +369,7 @@ CREATE TABLE public."waller-transaction" (
 );
 
 
-ALTER TABLE public."waller-transaction" OWNER TO postgres;
+ALTER TABLE public."wallet-transaction" OWNER TO postgres;
 
 --
 -- Name: waller-transaction_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -390,7 +390,7 @@ ALTER SEQUENCE public."waller-transaction_id_seq" OWNER TO postgres;
 -- Name: waller-transaction_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public."waller-transaction_id_seq" OWNED BY public."waller-transaction".id;
+ALTER SEQUENCE public."waller-transaction_id_seq" OWNED BY public."wallet-transaction".id;
 
 
 --
@@ -429,10 +429,10 @@ ALTER TABLE ONLY public.user_wallet ALTER COLUMN id SET DEFAULT nextval('public.
 
 
 --
--- Name: waller-transaction id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: wallet-transaction id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."waller-transaction" ALTER COLUMN id SET DEFAULT nextval('public."waller-transaction_id_seq"'::regclass);
+ALTER TABLE ONLY public."wallet-transaction" ALTER COLUMN id SET DEFAULT nextval('public."waller-transaction_id_seq"'::regclass);
 
 
 --
@@ -528,10 +528,10 @@ ba1d8d72-40b9-42df-aef9-0c0869037c90	cyros.sachin@gmail.com	sachin_dev	$2b$10$4s
 
 
 --
--- Data for Name: waller-transaction; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: wallet-transaction; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public."waller-transaction" (id, "userWalletId", title, amount, date, "createdAt", "updatedAt") FROM stdin;
+COPY public."wallet-transaction" (id, "userWalletId", title, amount, date, "createdAt", "updatedAt") FROM stdin;
 \.
 
 
@@ -690,10 +690,10 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: waller-transaction waller-transaction_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: wallet-transaction waller-transaction_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."waller-transaction"
+ALTER TABLE ONLY public."wallet-transaction"
     ADD CONSTRAINT "waller-transaction_pkey" PRIMARY KEY (id);
 
 
@@ -736,10 +736,10 @@ ALTER TABLE ONLY public.post_media
 
 
 --
--- Name: waller-transaction waller-transaction_userWalletId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: wallet-transaction waller-transaction_userWalletId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."waller-transaction"
+ALTER TABLE ONLY public."wallet-transaction"
     ADD CONSTRAINT "waller-transaction_userWalletId_fkey" FOREIGN KEY ("userWalletId") REFERENCES public.user_wallet(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
