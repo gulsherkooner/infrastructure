@@ -4,7 +4,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: Kiranraj@1234
-      POSTGRES_DB: my-app
+      POSTGRES_DB: my_app
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
