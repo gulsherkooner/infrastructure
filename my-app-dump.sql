@@ -272,10 +272,10 @@ CREATE TABLE public.user_payment_method (
 ALTER TABLE public.user_payment_method OWNER TO postgres;
 
 --
--- Name: user-payment-method_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: user_payment_method_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public."user-payment-method_id_seq"
+CREATE SEQUENCE public.user_payment_method_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -284,13 +284,13 @@ CREATE SEQUENCE public."user-payment-method_id_seq"
     CACHE 1;
 
 
-ALTER SEQUENCE public."user-payment-method_id_seq" OWNER TO postgres;
+ALTER SEQUENCE public.user_payment_method_id_seq OWNER TO postgres;
 
 --
--- Name: user-payment-method_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: user_payment_method_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public."user-payment-method_id_seq" OWNED BY public.user_payment_method.id;
+ALTER SEQUENCE public.user_payment_method_id_seq OWNED BY public.user_payment_method.id;
 
 
 --
@@ -309,10 +309,10 @@ CREATE TABLE public.user_wallet (
 ALTER TABLE public.user_wallet OWNER TO postgres;
 
 --
--- Name: user-wallet_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: user_wallet_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public."user-wallet_id_seq"
+CREATE SEQUENCE public.user_wallet_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -321,13 +321,13 @@ CREATE SEQUENCE public."user-wallet_id_seq"
     CACHE 1;
 
 
-ALTER SEQUENCE public."user-wallet_id_seq" OWNER TO postgres;
+ALTER SEQUENCE public.user_wallet_id_seq OWNER TO postgres;
 
 --
--- Name: user-wallet_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: user_wallet_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public."user-wallet_id_seq" OWNED BY public.user_wallet.id;
+ALTER SEQUENCE public.user_wallet_id_seq OWNED BY public.user_wallet.id;
 
 
 --
@@ -355,10 +355,10 @@ CREATE TABLE public.users (
 ALTER TABLE public.users OWNER TO postgres;
 
 --
--- Name: wallet-transaction; Type: TABLE; Schema: public; Owner: postgres
+-- Name: wallet_transaction; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public."wallet-transaction" (
+CREATE TABLE public.wallet_transaction (
     id integer NOT NULL,
     "userWalletId" integer NOT NULL,
     title character varying(255) NOT NULL,
@@ -369,13 +369,13 @@ CREATE TABLE public."wallet-transaction" (
 );
 
 
-ALTER TABLE public."wallet-transaction" OWNER TO postgres;
+ALTER TABLE public.wallet_transaction OWNER TO postgres;
 
 --
--- Name: waller-transaction_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: wallet_transaction_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public."waller-transaction_id_seq"
+CREATE SEQUENCE public.wallet_transaction_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -384,13 +384,13 @@ CREATE SEQUENCE public."waller-transaction_id_seq"
     CACHE 1;
 
 
-ALTER SEQUENCE public."waller-transaction_id_seq" OWNER TO postgres;
+ALTER SEQUENCE public.wallet_transaction_id_seq OWNER TO postgres;
 
 --
--- Name: waller-transaction_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: wallet_transaction_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public."waller-transaction_id_seq" OWNED BY public."wallet-transaction".id;
+ALTER SEQUENCE public.wallet_transaction_id_seq OWNED BY public.wallet_transaction.id;
 
 
 --
@@ -418,21 +418,21 @@ ALTER TABLE ONLY public.settings ALTER COLUMN id SET DEFAULT nextval('public.set
 -- Name: user_payment_method id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.user_payment_method ALTER COLUMN id SET DEFAULT nextval('public."user-payment-method_id_seq"'::regclass);
+ALTER TABLE ONLY public.user_payment_method ALTER COLUMN id SET DEFAULT nextval('public.user_payment_method_id_seq'::regclass);
 
 
 --
 -- Name: user_wallet id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.user_wallet ALTER COLUMN id SET DEFAULT nextval('public."user-wallet_id_seq"'::regclass);
+ALTER TABLE ONLY public.user_wallet ALTER COLUMN id SET DEFAULT nextval('public.user_wallet_id_seq'::regclass);
 
 
 --
--- Name: wallet-transaction id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: wallet_transaction id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."wallet-transaction" ALTER COLUMN id SET DEFAULT nextval('public."waller-transaction_id_seq"'::regclass);
+ALTER TABLE ONLY public.wallet_transaction ALTER COLUMN id SET DEFAULT nextval('public.wallet_transaction_id_seq'::regclass);
 
 
 --
@@ -528,10 +528,10 @@ ba1d8d72-40b9-42df-aef9-0c0869037c90	cyros.sachin@gmail.com	sachin_dev	$2b$10$4s
 
 
 --
--- Data for Name: wallet-transaction; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: wallet_transaction; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public."wallet-transaction" (id, "userWalletId", title, amount, date, "createdAt", "updatedAt") FROM stdin;
+COPY public.wallet_transaction (id, "userWalletId", title, amount, date, "createdAt", "updatedAt") FROM stdin;
 \.
 
 
@@ -557,24 +557,24 @@ SELECT pg_catalog.setval('public.settings_id_seq', 1, false);
 
 
 --
--- Name: user-payment-method_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: user_payment_method_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."user-payment-method_id_seq"', 1, false);
-
-
---
--- Name: user-wallet_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public."user-wallet_id_seq"', 1, false);
+SELECT pg_catalog.setval('public.user_payment_method_id_seq', 1, false);
 
 
 --
--- Name: waller-transaction_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: user_wallet_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."waller-transaction_id_seq"', 1, false);
+SELECT pg_catalog.setval('public.user_wallet_id_seq', 1, false);
+
+
+--
+-- Name: wallet_transaction_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.wallet_transaction_id_seq', 1, false);
 
 
 --
@@ -642,27 +642,27 @@ ALTER TABLE ONLY public.settings
 
 
 --
--- Name: user_payment_method user-payment-method_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: user_payment_method user_payment_method_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.user_payment_method
-    ADD CONSTRAINT "user-payment-method_pkey" PRIMARY KEY (id);
+    ADD CONSTRAINT user_payment_method_pkey PRIMARY KEY (id);
 
 
 --
--- Name: user_wallet user-wallet_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.user_wallet
-    ADD CONSTRAINT "user-wallet_pkey" PRIMARY KEY (id);
-
-
---
--- Name: user_wallet user-wallet_userId_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: user_wallet user_wallet_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.user_wallet
-    ADD CONSTRAINT "user-wallet_userId_key" UNIQUE ("userId");
+    ADD CONSTRAINT user_wallet_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_wallet user_wallet_userId_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.user_wallet
+    ADD CONSTRAINT "user_wallet_userId_key" UNIQUE ("userId");
 
 
 --
@@ -690,11 +690,11 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: wallet-transaction waller-transaction_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: wallet_transaction wallet_transaction_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."wallet-transaction"
-    ADD CONSTRAINT "waller-transaction_pkey" PRIMARY KEY (id);
+ALTER TABLE ONLY public.wallet_transaction
+    ADD CONSTRAINT wallet_transaction_pkey PRIMARY KEY (id);
 
 
 --
@@ -736,11 +736,11 @@ ALTER TABLE ONLY public.post_media
 
 
 --
--- Name: wallet-transaction waller-transaction_userWalletId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: wallet_transaction wallet_transaction_userWalletId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."wallet-transaction"
-    ADD CONSTRAINT "waller-transaction_userWalletId_fkey" FOREIGN KEY ("userWalletId") REFERENCES public.user_wallet(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY public.wallet_transaction
+    ADD CONSTRAINT "wallet_transaction_userWalletId_fkey" FOREIGN KEY ("userWalletId") REFERENCES public.user_wallet(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
