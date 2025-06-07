@@ -61,6 +61,40 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: comment_likes; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.comment_likes (
+    id uuid NOT NULL,
+    comment_id uuid NOT NULL,
+    user_id uuid NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.comment_likes OWNER TO postgres;
+
+--
+-- Name: comments; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.comments (
+    comment_id uuid NOT NULL,
+    post_id uuid NOT NULL,
+    user_id uuid NOT NULL,
+    parent_comment_id uuid,
+    text text NOT NULL,
+    is_deleted boolean DEFAULT false,
+    likes_count integer DEFAULT 0,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.comments OWNER TO postgres;
+
+--
 -- Name: dating_post; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -436,6 +470,32 @@ ALTER TABLE ONLY public.wallet_transaction ALTER COLUMN id SET DEFAULT nextval('
 
 
 --
+-- Data for Name: comment_likes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.comment_likes (id, comment_id, user_id, created_at, updated_at) FROM stdin;
+d17f3424-a966-4765-bbde-7ea5ef682da1	a577d1e6-baf1-4dfb-87ab-0c518304a656	c9a9302f-f54d-476c-826f-d975ecbb16f1	2025-06-07 09:46:36.61+05:30	2025-06-07 09:46:36.61+05:30
+36d5ef8a-76a2-4462-a62f-3cf8da1c93bd	db01e828-0b04-4788-944f-883a5cf2ce6f	c9a9302f-f54d-476c-826f-d975ecbb16f1	2025-06-07 09:54:28.051+05:30	2025-06-07 09:54:28.051+05:30
+\.
+
+
+--
+-- Data for Name: comments; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.comments (comment_id, post_id, user_id, parent_comment_id, text, is_deleted, likes_count, created_at, updated_at) FROM stdin;
+e2581826-ec62-4515-85ef-164a94a2cc21	42aa9df9-b122-4cd9-9f1a-ad2c3fa7f7c4	c9a9302f-f54d-476c-826f-d975ecbb16f1	a577d1e6-baf1-4dfb-87ab-0c518304a656	this is first reply	f	0	2025-06-06 19:04:56.914+05:30	2025-06-06 19:04:56.914+05:30
+4f6667c9-16ed-4a71-b7c0-ff169740d0af	42aa9df9-b122-4cd9-9f1a-ad2c3fa7f7c4	c9a9302f-f54d-476c-826f-d975ecbb16f1	db01e828-0b04-4788-944f-883a5cf2ce6f	this is second reply	f	0	2025-06-06 19:06:37.7+05:30	2025-06-06 19:06:37.7+05:30
+beeefd6a-0a36-45c6-9568-89e917146cf4	42aa9df9-b122-4cd9-9f1a-ad2c3fa7f7c4	c9a9302f-f54d-476c-826f-d975ecbb16f1	\N	saxdwasd	t	0	2025-06-06 12:07:42.202+05:30	2025-06-07 09:31:14.343+05:30
+33ff50aa-448e-431e-9644-b88b1800fbb7	42aa9df9-b122-4cd9-9f1a-ad2c3fa7f7c4	c9a9302f-f54d-476c-826f-d975ecbb16f1	\N	asdwasdw	t	0	2025-06-06 12:09:09.893+05:30	2025-06-07 09:31:59.865+05:30
+a6cdb541-ba06-46da-9036-d0e060523d7b	42aa9df9-b122-4cd9-9f1a-ad2c3fa7f7c4	c9a9302f-f54d-476c-826f-d975ecbb16f1	db01e828-0b04-4788-944f-883a5cf2ce6f	this is my third reply	t	0	2025-06-07 09:32:14.735+05:30	2025-06-07 09:35:35.812+05:30
+90b22e58-9c12-4306-987f-9d39d49e51ce	42aa9df9-b122-4cd9-9f1a-ad2c3fa7f7c4	c9a9302f-f54d-476c-826f-d975ecbb16f1	db01e828-0b04-4788-944f-883a5cf2ce6f	asdasd	t	0	2025-06-07 09:39:42.4+05:30	2025-06-07 09:39:45.775+05:30
+a577d1e6-baf1-4dfb-87ab-0c518304a656	42aa9df9-b122-4cd9-9f1a-ad2c3fa7f7c4	c9a9302f-f54d-476c-826f-d975ecbb16f1	\N	this is my first comment	f	1	2025-06-06 11:29:37.969+05:30	2025-06-07 09:46:36.665+05:30
+db01e828-0b04-4788-944f-883a5cf2ce6f	42aa9df9-b122-4cd9-9f1a-ad2c3fa7f7c4	c9a9302f-f54d-476c-826f-d975ecbb16f1	\N	this is my second comment	f	1	2025-06-06 12:04:54.902+05:30	2025-06-07 09:54:28.066+05:30
+\.
+
+
+--
 -- Data for Name: dating_post; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -484,7 +544,7 @@ f55e0c82-aa89-4f23-8bcb-5eb9dadf0937	c9a9302f-f54d-476c-826f-d975ecbb16f1	Nature
 2212470a-2bd8-48d6-9a81-a4aab5dd2a9c	c9a9302f-f54d-476c-826f-d975ecbb16f1	AI frmale image	\N	["https://dl.dropboxusercontent.com/scl/fi/gmpepgrf1l2jdfuhhmalb/1747669090771-face1.jpg?rlkey=ydjm8cqu8q2d68gnkklwwiqdf"]	2025-05-19 21:08:12.965+05:30	2025-05-19 21:08:12.965+05:30	image	f	\N	["AI"]	public	0	0	0	t
 af08163b-4112-4a95-8ee8-383bf32d6143	01e6d90f-7a1a-490a-bb88-b56b60d4c694	Portrait of a street	Portrait of a street	["https://dl.dropboxusercontent.com/scl/fi/ifjfwq47t35n0u4ja3foj/1747711301343-photo-1602492665157-639323eadd31.jpeg?rlkey=m664xwkfkdgmj00gkd59w9toe"]	2025-05-20 08:51:48.604+05:30	2025-05-20 08:51:48.604+05:30	image	f	\N	["Portrait"]	public	0	0	0	t
 cce7df98-53b8-4153-b0ab-7b10395a7b2e	c1813272-3d94-42c3-a283-df35ba4456f7	HEllooo Everyone	\N	["https://dl.dropboxusercontent.com/scl/fi/xfsz2tgr4fd379gxm5dic/1747730626885-ChatGPT-Image-May-16-2025-10_47_27-PM.png?rlkey=d0npokexlwh11zgk8clmly5f9"]	2025-05-20 14:13:49.029+05:30	2025-05-20 14:13:49.029+05:30	image	f	\N	[]	public	0	0	0	t
-5931a3ec-a165-4ed9-867f-0767b8052ca3	c1813272-3d94-42c3-a283-df35ba4456f7	HEllooo Everyone	\N	["https://dl.dropboxusercontent.com/scl/fi/s9cs6bqz4ysjfjok5odl5/tikmate.app_7488599562404236550_hd.mp4?rlkey=140osgeoqslqzhvvcz5c4x2f8&st=k44dp5ia"]	2025-05-20 14:13:55.376+05:30	2025-05-20 14:13:55.376+05:30	video	f	\N	[]	public	0	0	0	t
+5931a3ec-a165-4ed9-867f-0767b8052ca3	c1813272-3d94-42c3-a283-df35ba4456f7	HEllooo Everyone	\N	["https://dl.dropboxusercontent.com/scl/fi/s9cs6bqz4ysjfjok5odl5/tikmate.app_7488599562404236550_hd.mp4?rlkey=140osgeoqslqzhvvcz5c4x2f8&st=k44dp5ia"]	2025-05-20 14:13:55.376+05:30	2025-05-20 14:13:55.376+05:30	video	t	\N	[]	public	0	0	0	t
 \.
 
 
@@ -575,6 +635,22 @@ SELECT pg_catalog.setval('public.user_wallet_id_seq', 1, false);
 --
 
 SELECT pg_catalog.setval('public.wallet_transaction_id_seq', 1, false);
+
+
+--
+-- Name: comment_likes comment_likes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.comment_likes
+    ADD CONSTRAINT comment_likes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: comments comments_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.comments
+    ADD CONSTRAINT comments_pkey PRIMARY KEY (comment_id);
 
 
 --
@@ -698,6 +774,13 @@ ALTER TABLE ONLY public.wallet_transaction
 
 
 --
+-- Name: comment_likes_comment_id_user_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX comment_likes_comment_id_user_id ON public.comment_likes USING btree (comment_id, user_id);
+
+
+--
 -- Name: followers_target_userid; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -709,6 +792,46 @@ CREATE INDEX followers_target_userid ON public.followers USING btree (target_use
 --
 
 CREATE INDEX followers_user_id ON public.followers USING btree (user_id);
+
+
+--
+-- Name: comment_likes comment_likes_comment_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.comment_likes
+    ADD CONSTRAINT comment_likes_comment_id_fkey FOREIGN KEY (comment_id) REFERENCES public.comments(comment_id) ON DELETE CASCADE;
+
+
+--
+-- Name: comment_likes comment_likes_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.comment_likes
+    ADD CONSTRAINT comment_likes_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(user_id) ON DELETE CASCADE;
+
+
+--
+-- Name: comments comments_parent_comment_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.comments
+    ADD CONSTRAINT comments_parent_comment_id_fkey FOREIGN KEY (parent_comment_id) REFERENCES public.comments(comment_id) ON DELETE CASCADE;
+
+
+--
+-- Name: comments comments_post_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.comments
+    ADD CONSTRAINT comments_post_id_fkey FOREIGN KEY (post_id) REFERENCES public.posts(post_id) ON DELETE CASCADE;
+
+
+--
+-- Name: comments comments_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.comments
+    ADD CONSTRAINT comments_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(user_id) ON DELETE CASCADE;
 
 
 --
