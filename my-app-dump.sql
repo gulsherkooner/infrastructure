@@ -205,6 +205,20 @@ CREATE TABLE public.followers (
 ALTER TABLE public.followers OWNER TO postgres;
 
 --
+-- Name: post_likes; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.post_likes (
+    id uuid NOT NULL,
+    post_id uuid NOT NULL,
+    user_id uuid NOT NULL,
+    created_at timestamp with time zone
+);
+
+
+ALTER TABLE public.post_likes OWNER TO postgres;
+
+--
 -- Name: post_media; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -524,6 +538,15 @@ COPY public.followers (follow_id, user_id, target_userid, created_at) FROM stdin
 
 
 --
+-- Data for Name: post_likes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.post_likes (id, post_id, user_id, created_at) FROM stdin;
+268c9a48-5c66-42ad-ac92-681ade2fb2c5	42aa9df9-b122-4cd9-9f1a-ad2c3fa7f7c4	c9a9302f-f54d-476c-826f-d975ecbb16f1	2025-06-09 10:00:14.534+05:30
+\.
+
+
+--
 -- Data for Name: post_media; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -537,7 +560,6 @@ COPY public.post_media (id, post_id, media_type, url, thumbnail_url, duration, w
 --
 
 COPY public.posts (post_id, user_id, title, description, url, created_at, updated_at, post_type, is_reel, category, post_tags, visibility, likes_count, comments_count, views_count, is_active) FROM stdin;
-42aa9df9-b122-4cd9-9f1a-ad2c3fa7f7c4	3a01dbfc-95e1-4b65-be97-edb34aafd030	img	img	["https://dl.dropboxusercontent.com/scl/fi/4qv627c5fvptroyr7bhjy/1748317230651-Color.png?rlkey=675fz70g868vfpsv33nqmk0oe"]	2025-05-27 09:10:30.64+05:30	2025-05-27 09:10:30.64+05:30	image	f	\N	["img"]	public	0	0	0	t
 f55e0c82-aa89-4f23-8bcb-5eb9dadf0937	c9a9302f-f54d-476c-826f-d975ecbb16f1	Nature calls for more 	Nature calls for more 	["https://dl.dropboxusercontent.com/scl/fi/f4qqkfu56d0fy8g8bo87b/1747579541512-IMG20250518171956.jpg?rlkey=zrrk0n9s4zxy4wdob4d2ds8li"]	2025-05-18 20:15:43.781+05:30	2025-05-18 20:15:43.781+05:30	image	f	\N	["Nature"]	public	0	0	0	t
 7850bd1b-3900-484e-a1ec-771c10432d54	c9a9302f-f54d-476c-826f-d975ecbb16f1	Image	Image	["https://dl.dropboxusercontent.com/scl/fi/n6alx5qaec22dc5iuad8m/1747579673851-IMG20250515091650.jpg?rlkey=rcg8g1jlb35ngdq49s7mt6txc"]	2025-05-18 20:17:56.028+05:30	2025-05-18 20:17:56.028+05:30	image	f	\N	["Image"]	public	0	0	0	t
 5788d705-19bf-4d19-a53c-c43d3b3048b8	c9a9302f-f54d-476c-826f-d975ecbb16f1	Journey to the new world 	Journey is key role for development, with out journey we can't experience new things in life which make a person to be in a single perspective view.	["https://dl.dropboxusercontent.com/scl/fi/1ywi0f9ffce729n1a03k6/1747580537744-1000032612.jpg?rlkey=2jyw4b4wezwq6ms9vlrvnhvyn"]	2025-05-18 20:32:19.646+05:30	2025-05-18 20:32:19.646+05:30	image	f	\N	["Nature","Journey"]	public	0	0	0	t
@@ -545,6 +567,7 @@ f55e0c82-aa89-4f23-8bcb-5eb9dadf0937	c9a9302f-f54d-476c-826f-d975ecbb16f1	Nature
 af08163b-4112-4a95-8ee8-383bf32d6143	01e6d90f-7a1a-490a-bb88-b56b60d4c694	Portrait of a street	Portrait of a street	["https://dl.dropboxusercontent.com/scl/fi/ifjfwq47t35n0u4ja3foj/1747711301343-photo-1602492665157-639323eadd31.jpeg?rlkey=m664xwkfkdgmj00gkd59w9toe"]	2025-05-20 08:51:48.604+05:30	2025-05-20 08:51:48.604+05:30	image	f	\N	["Portrait"]	public	0	0	0	t
 cce7df98-53b8-4153-b0ab-7b10395a7b2e	c1813272-3d94-42c3-a283-df35ba4456f7	HEllooo Everyone	\N	["https://dl.dropboxusercontent.com/scl/fi/xfsz2tgr4fd379gxm5dic/1747730626885-ChatGPT-Image-May-16-2025-10_47_27-PM.png?rlkey=d0npokexlwh11zgk8clmly5f9"]	2025-05-20 14:13:49.029+05:30	2025-05-20 14:13:49.029+05:30	image	f	\N	[]	public	0	0	0	t
 5931a3ec-a165-4ed9-867f-0767b8052ca3	c1813272-3d94-42c3-a283-df35ba4456f7	HEllooo Everyone	\N	["https://dl.dropboxusercontent.com/scl/fi/s9cs6bqz4ysjfjok5odl5/tikmate.app_7488599562404236550_hd.mp4?rlkey=140osgeoqslqzhvvcz5c4x2f8&st=k44dp5ia"]	2025-05-20 14:13:55.376+05:30	2025-05-20 14:13:55.376+05:30	video	t	\N	[]	public	0	0	0	t
+42aa9df9-b122-4cd9-9f1a-ad2c3fa7f7c4	3a01dbfc-95e1-4b65-be97-edb34aafd030	img	img	["https://dl.dropboxusercontent.com/scl/fi/4qv627c5fvptroyr7bhjy/1748317230651-Color.png?rlkey=675fz70g868vfpsv33nqmk0oe"]	2025-05-27 09:10:30.64+05:30	2025-05-27 09:10:30.64+05:30	image	f	\N	["img"]	public	1	0	0	t
 \.
 
 
@@ -686,6 +709,14 @@ ALTER TABLE ONLY public.followers
 
 
 --
+-- Name: post_likes post_likes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.post_likes
+    ADD CONSTRAINT post_likes_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: post_media post_media_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -795,6 +826,13 @@ CREATE INDEX followers_user_id ON public.followers USING btree (user_id);
 
 
 --
+-- Name: post_likes_post_id_user_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX post_likes_post_id_user_id ON public.post_likes USING btree (post_id, user_id);
+
+
+--
 -- Name: comment_likes comment_likes_comment_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -848,6 +886,14 @@ ALTER TABLE ONLY public.followers
 
 ALTER TABLE ONLY public.followers
     ADD CONSTRAINT followers_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(user_id);
+
+
+--
+-- Name: post_likes post_likes_post_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.post_likes
+    ADD CONSTRAINT post_likes_post_id_fkey FOREIGN KEY (post_id) REFERENCES public.posts(post_id) ON DELETE CASCADE;
 
 
 --
